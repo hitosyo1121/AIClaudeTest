@@ -6,6 +6,14 @@ export const createEventSchema = z.object({
   time: z.string().regex(/^\d{2}:\d{2}$/).optional().or(z.literal('')),
   type: z.enum(['regular', 'travel', 'birthday', 'school', 'outing']),
   description: z.string().max(2000).optional().or(z.literal('')),
+  recurrence: z.enum(['none', 'daily', 'weekly', 'monthly', 'yearly']).optional(),
+  recurrence_end_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().or(z.literal('')),
+  member_id: z.number().int().positive().optional(),
+});
+
+export const createMemberSchema = z.object({
+  name: z.string().min(1, '名前は必須です').max(50),
+  color: z.string().regex(/^#[0-9a-fA-F]{6}$/, '色の形式が正しくありません'),
 });
 
 export const travelPlanSchema = z.object({

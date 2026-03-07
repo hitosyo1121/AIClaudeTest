@@ -6,7 +6,8 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const month = searchParams.get('month') || undefined;
-    const events = getAllEvents(month);
+    const type = searchParams.get('type') || undefined;
+    const events = getAllEvents(month, type);
     return NextResponse.json({ events });
   } catch (error) {
     console.error('GET /api/events error:', error);

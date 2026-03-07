@@ -1,4 +1,12 @@
 export type EventType = 'regular' | 'travel' | 'birthday' | 'school' | 'outing';
+export type RecurrenceType = 'none' | 'daily' | 'weekly' | 'monthly' | 'yearly';
+
+export interface FamilyMember {
+  id: number;
+  name: string;
+  color: string;
+  created_at: string;
+}
 
 export interface Event {
   id: number;
@@ -7,6 +15,10 @@ export interface Event {
   time?: string;
   type: EventType;
   description?: string;
+  recurrence: RecurrenceType;
+  recurrence_end_date?: string;
+  member_id?: number;
+  member?: FamilyMember;
   created_at: string;
   photos?: Photo[];
 }
@@ -81,3 +93,22 @@ export const EVENT_TYPE_DOT_COLORS: Record<EventType, string> = {
   school: 'bg-green-500',
   outing: 'bg-orange-500',
 };
+
+export const RECURRENCE_LABELS: Record<RecurrenceType, string> = {
+  none: '繰り返しなし',
+  daily: '毎日',
+  weekly: '毎週',
+  monthly: '毎月',
+  yearly: '毎年',
+};
+
+export const MEMBER_COLOR_OPTIONS = [
+  { value: '#ef4444', label: '赤' },
+  { value: '#f97316', label: 'オレンジ' },
+  { value: '#eab308', label: '黄' },
+  { value: '#22c55e', label: '緑' },
+  { value: '#3b82f6', label: '青' },
+  { value: '#8b5cf6', label: '紫' },
+  { value: '#ec4899', label: 'ピンク' },
+  { value: '#14b8a6', label: 'ティール' },
+];
