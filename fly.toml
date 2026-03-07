@@ -1,0 +1,29 @@
+# fly.toml - Fly.io 設定ファイル
+# ※ app名は fly launch 時に自動設定されます
+
+[build]
+
+[env]
+  PORT = "3000"
+  NODE_ENV = "production"
+
+# SQLite と写真アップロードの永続化
+[mounts]
+  source = "family_data"
+  destination = "/app/data"
+
+[[mounts]]
+  source = "family_uploads"
+  destination = "/app/public/uploads"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true   # アクセスがないと自動停止（節約）
+  auto_start_machines = true  # アクセス時に自動起動
+  min_machines_running = 0    # 0 = 使わないときは完全停止
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1
